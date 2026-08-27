@@ -2,194 +2,356 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PIDO88 - Portal Game Online Terbaru Resmi</title>
     <style>
-        html, body {
+        /* Mengunci halaman agar pas 1 layar HP tanpa scroll */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+        body, html {
             width: 100%;
-            height: 100vh;
+            height: 100%;
             overflow: hidden;
-            font-family: Arial, sans-serif;
-            background-color: #050508;
-            /* LINK GAMBAR MAHJONG EMAS PREMIUM LANGSUNG ONLINE */
-            background-image: linear-gradient(to bottom, rgba(5, 5, 8, 0.65), rgba(5, 5, 8, 0.9)), url('https://unsplash.com');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif;
+            background-color: #020000;
+        }
+
+        /* STRUKTUR UTAMA DENGAN NUANSA ELEKTRIK & KEMENANGAN EMAS */
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 15px 12px 15px;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, #000000 0%, #100000 45%, #2a1800 100%);
+        }
+
+        /* Efek Sambaran Kilat Petir di Bagian Atas */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: radial-gradient(ellipse at top, rgba(255, 0, 0, 0.3) 0%, rgba(255, 183, 0, 0.1) 50%, transparent 80%);
+            pointer-events: none;
+            border-top: 2px solid #ff3333;
+            box-shadow: 0 0 20px #ff0000, 0 0 40px #ffb700;
+            animation: lightningZap 3.5s infinite ease-in-out;
+        }
+
+        /* Teks Brand PIDO88 Asli */
+        .brand-section {
+            margin-top: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        .brand-title {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #ffb700;
+            font-style: italic;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px #ffb700, 0 0 30px #ff3333;
+        }
+        .brand-subtitle {
+            background-color: #990000;
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        /* Struktur Baris Tombol */
+        .action-section {
+            width: 100%;
+            max-width: 360px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            z-index: 2;
+        }
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #ff3333;
+            border-radius: 6px;
+            padding: 10px 15px;
+            text-align: left;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.25);
+        }
+        .action-info h2 {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .action-info p {
+            color: #ff3333;
+            font-size: 0.68rem;
+            margin-top: 2px;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(255,0,0,0.5);
+        }
+
+        /* Tombol Berkedip */
+        .btn-click {
+            background: linear-gradient(180deg, #ff2a2a, #990000);
+            color: #fff;
+            font-size: 0.78rem;
+            font-weight: bold;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid #ff6666;
+            white-space: nowrap;
+            cursor: pointer;
+            animation: neonBlink 1s infinite ease-in-out;
+        }
+
+        /* Grid Informasi 4 Kotak */
+        .info-grid {
+            width: 100%;
+            max-width: 360px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            position: relative;
+            z-index: 2;
+        }
+        .grid-item {
+            background: rgba(10, 10, 10, 0.85);
+            border: 1px solid #332200;
+            border-radius: 6px;
+            padding: 8px;
+            box-shadow: 0 0 10px rgba(255, 183, 0, 0.05);
+        }
+        .grid-title {
+            color: #888;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .grid-value {
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+        .color-gold { color: #ffb700; text-shadow: 0 0 8px rgba(255, 183, 0, 0.6); }
+        .color-red { color: #ff3333; text-shadow: 0 0 8px rgba(255, 51, 51, 0.6); }
+
+        /* Bagian Jaminan Profesional */
+        .footer-section {
+            width: 100%;
+            max-width: 360px;
+            margin-top: 5px;
+            position: relative;
+            z-index: 2;
+        }
+        .footer-features {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px dashed rgba(255, 183, 0, 0.3);
+            padding-top: 10px;
+            margin-bottom: 8px;
+        }
+        .feature-item { display: flex; flex-direction: column; align-items: center; }
+        .feature-icon {
+            width: 22px;
+            height: 22px;
+            border: 1px solid #ffb700;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #ffb700;
+            font-size: 0.6rem;
+            font-weight: bold;
+            margin-bottom: 2px;
+            background: rgba(255, 183, 0, 0.15);
+            box-shadow: 0 0 5px rgba(255, 183, 0, 0.4);
         }
-        
-        .wrapper {
+        .feature-label { color: #aaa; font-size: 0.5rem; font-weight: bold; text-transform: uppercase; }
+        .feature-sublabel { color: #ffb700; font-size: 0.45rem; }
+        .copyright { color: #777; font-size: 0.6rem; letter-spacing: 0.5px; }
+        .copyright span { color: #ffb700; }
+
+        /* LAYAR LOADING OVERLAY (LINK GACOR DETECTOR) */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            max-width: 420px;
-            padding: 15px;
-            box-sizing: border-box;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
-        }
-
-        .brand-title {
-            text-align: center;
-            font-size: 42px;
-            font-weight: 900;
-            color: #ffb703;
-            margin: 0 0 5px 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 183, 3, 0.6), 2px 2px 4px #000;
-            font-style: italic;
-        }
-
-        .running-text {
-            width: 100%;
-            background: rgba(11, 12, 16, 0.85);
-            color: #ff3333;
-            padding: 10px 0;
-            font-size: 13px;
-            font-weight: bold;
-            text-align: center;
-            border-bottom: 2px solid #ff3333;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            border-radius: 4px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        
-        .btn-container { 
-            width: 100%;
-            background: rgba(20, 10, 10, 0.85);
-            border: 1px solid #ff3333;
-            border-radius: 8px;
-            padding: 14px 12px;
-            margin-bottom: 14px;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-sizing: border-box;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        
-        .text-left { text-align: left; }
-        .text-left h3 { margin: 0; color: #ffffff; font-size: 15px; letter-spacing: 1px; text-shadow: 1px 1px 3px #000; }
-        .text-left p { margin: 4px 0 0 0; color: #ff3333; font-size: 11px; font-weight: bold; }
-        
-        .button { 
-            background: linear-gradient(to right, #ff3333, #b30000);
-            color: white !important;
-            border: none;
-            padding: 11px 22px;
+        .loading-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 183, 0, 0.1);
+            border-left-color: #ffb700;
+            border-right-color: #ff3333;
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.5);
+        }
+        .loading-text {
+            color: #fff;
+            margin-top: 25px;
+            font-size: 1.1rem;
             font-weight: bold;
-            font-size: 13px;
-            border-radius: 5px;
-            text-decoration: none;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.7);
+            letter-spacing: 1px;
             text-transform: uppercase;
-            /* EFEK BERKEDIP PADA TOMBOL */
-            animation: blinkEffect 1s infinite linear;
         }
-
-        /* SISTEM ANIMASI BERKEDIP (FLASHING) */
-        @keyframes blinkEffect {
-            0% { opacity: 1; box-shadow: 0 0 15px rgba(255, 51, 51, 0.7); }
-            50% { opacity: 0.4; box-shadow: 0 0 2px rgba(255, 51, 51, 0.2); }
-            100% { opacity: 1; box-shadow: 0 0 15px rgba(255, 51, 51, 0.7); }
-        }
-
-        .promo-grid {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            gap: 8px;
-            margin-bottom: 8px;
-            box-sizing: border-box;
-        }
-
-        .promo-box {
-            flex: 1;
-            background: rgba(15, 15, 20, 0.85);
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 10px 5px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-        }
-
-        .promo-box span {
-            display: block;
-            font-size: 10px;
-            color: #aaa;
-            text-transform: uppercase;
+        .loading-status {
+            color: #ffb700;
+            font-size: 0.85rem;
+            margin-top: 8px;
             font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
         }
 
-        .promo-box p {
-            margin: 4px 0 0 0;
-            font-size: 13px;
-            color: #ff3333;
-            font-weight: bold;
+        /* KEYFRAMES ANIMASI */
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes lightningZap {
+            0%, 92%, 96%, 100% { opacity: 0.7; filter: brightness(1); }
+            93% { opacity: 1; filter: brightness(2); background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.7) 0%, rgba(255, 0, 0, 0.4) 40%, transparent 80%); }
+            95% { opacity: 0.8; filter: brightness(1.5); }
         }
-
-        .stars {
-            color: #ffb703 !important;
-            font-size: 13px !important;
+        @keyframes neonBlink {
+            0% { box-shadow: 0 0 4px rgba(255, 42, 42, 0.6); filter: brightness(0.95); }
+            50% { box-shadow: 0 0 20px #ff2a2a, 0 0 8px #ffb700; filter: brightness(1.3); }
+            100% { box-shadow: 0 0 4px rgba(255, 42, 42, 0.6); filter: brightness(0.95); }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <h1 class="brand-title">PIDO88</h1>
-
-        <div class="running-text">
-            PORTAL GAME ONLINE TERBARU RESMI
+    <!-- UTAMA CONTAINER -->
+    <div class="container">
+        <!-- Brand PIDO88 Asli -->
+        <div class="brand-section">
+            <h1 class="brand-title">PIDO88</h1>
+            <div class="brand-subtitle">PORTAL GAME ONLINE TERBARU RESMI</div>
         </div>
 
-        <div class="btn-container">
-            <div class="text-left">
-                <h3>KLIK UNTUK DAFTAR</h3>
-                <p>AKUN VIP PREMIUM</p>
+        <!-- Tombol Daftar & Login (Dengan Fungsi Klik Loading) -->
+        <div class="action-section">
+            <div class="action-row">
+                <div class="action-info">
+                    <h2>KLIK UNTUK DAFTAR</h2>
+                    <p>AKUN VIP PREMIUM</p>
+                </div>
+                <!-- Silakan masukkan link daftar Anda di dalam tanda kurung petik bawah ini -->
+                <div onclick="prosesKeLink('https://bola88you.com/?ref=a@ridoe123pro')" class="btn-click">KLIK DI SINI</div>
             </div>
-            <a href="https://bola88you.com/?ref=a@ridoe123pro" class="button">KLIK DI SINI</a>
-        </div>
-
-        <div class="btn-container">
-            <div class="text-left">
-                <h3>KLIK UNTUK LOGIN</h3>
-                <p>LINK ALTERNATIF RESMI</p>
-            </div>
-            <a href="https://bola88you.com/?ref=a@ridoe123pro" class="button">KLIK DI SINI</a>
-        </div>
-
-        <div class="promo-grid">
-            <div class="promo-box">
-                <span>RATING</span>
-                <p class="stars">★★★★★</p>
-            </div>
-            <div class="promo-box">
-                <span>DEPO</span>
-                <p>5 RIBU</p>
+            
+            <div class="action-row">
+                <div class="action-info">
+                    <h2>KLIK UNTUK LOGIN</h2>
+                    <p>LINK ALTERNATIF RESMI</p>
+                </div>
+                <!-- Silakan masukkan link login Anda di dalam tanda kurung petik bawah ini -->
+                <div onclick="prosesKeLink('https://bola88you.com/?ref=a@ridoe123pro')" class="btn-click">KLIK DI SINI</div>
             </div>
         </div>
 
-        <div class="promo-grid">
-            <div class="promo-box">
-                <span>PROMO</span>
-                <p>BONUS 100%</p>
+        <!-- Grid Informasi 4 Kotak Asli -->
+        <div class="info-grid">
+            <div class="grid-item">
+                <div class="grid-title">Rating</div>
+                <div class="grid-value color-gold">★★★★★</div>
             </div>
-            <div class="promo-box">
-                <span>PROSES</span>
-                <p>&plusmn; 1 MENIT</p>
+            <div class="grid-item">
+                <div class="grid-title">Depo</div>
+                <div class="grid-value color-red">5 RIBU</div>
             </div>
+            <div class="grid-item">
+                <div class="grid-title">Promo</div>
+                <div class="grid-value color-red">BONUS 100%</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-title">Proses</div>
+                <div class="grid-value color-red">± 1 MENIT</div>
+            </div>
+        </div>
+
+        <!-- Bagian Jaminan Profesional -->
+        <div class="footer-section">
+            <div class="footer-features">
+                <div class="feature-item"><div class="feature-icon">JP</div><div class="feature-label">Jackpot</div><div class="feature-sublabel">100% Bayar</div></div>
+                <div class="feature-item"><div class="feature-icon">24</div><div class="feature-label">Service</div><div class="feature-sublabel">24 Jam</div></div>
+                <div class="feature-item"><div class="feature-icon">⚙</div><div class="feature-label">Engine</div><div class="feature-sublabel">Terbaik</div></div>
+                <div class="feature-item"><div class="feature-icon">🔒</div><div class="feature-label">Rahasia</div><div class="feature-sublabel">Aman</div></div>
+                <div class="feature-item"><div class="feature-icon">18+</div><div class="feature-label">18 Tahun</div><div class="feature-sublabel">Ke Atas</div></div>
+            </div>
+            <div class="copyright">&copy; 2026 - 2027 <span>PIDO88</span> SEO RINTIS</div>
         </div>
     </div>
+
+    <!-- ELEMEN LOADING SCREEN (Tersembunyi di awal) -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Mencari Server Terbaik...</div>
+        <div id="statusText" class="loading-status">Silakan Tunggu Sebentar</div>
+    </div>
+
+    <!-- SCRIPT JAVASCRIPT UNTUK EFEK REDIRECT LOADING -->
+    <script>
+        function prosesKeLink(targetUrl) {
+            const overlay = document.getElementById('loadingOverlay');
+            const statusLabel = document.getElementById('statusText');
+            
+            // 1. Munculkan layar loading hitam transparan
+            overlay.classList.add('show');
+            
+            // 2. Detik ke-1: Mengubah tulisan teks status pencarian
+            setTimeout(() => {
+                statusLabel.innerText = "Menganalisis Kepadatan Server...";
+                statusLabel.style.color = "#ff3333";
+            }, 1000);
+
+            // 3. Detik ke-1: Mengubah tulisan sukses "Link Gacor Ditemukan"
+            setTimeout(() => {
+                statusLabel.innerText = "✓ LINK GACOR DITEMUKAN! MENGALIHKAN...";
+                statusLabel.style.color = "#ffb700";
+            }, 2200);
+
+            // 4. Detik ke-3.2: Otomatis lempar pengunjung ke link asli
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 3200);
+        }
+    </script>
 
 </body>
 </html>
